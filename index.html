@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rozhan Vassef</title>
+<meta name="description" content="Rozhan Vassef: Computer Science student at Amirkabir University of Technology, researching 3D computer vision and generative models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --bg-soft:#f6f7f9; --text:#1a1d23; --text-2:#4a515c; --text-3:#7a828e;
+  --line:#e6e8ec; --accent:#2f4fb5; --accent-soft:#eef1fb; --accent-text:#24409a;
+  --chip:#f3f4f6; --shadow:0 1px 2px rgba(16,24,40,.04),0 1px 3px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1115; --bg-soft:#161920; --text:#e8eaee; --text-2:#b4bac4; --text-3:#858c98;
+    --line:#262a33; --accent:#8fa6ff; --accent-soft:#1b2235; --accent-text:#b3c2ff;
+    --chip:#1c2028; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1115; --bg-soft:#161920; --text:#e8eaee; --text-2:#b4bac4; --text-3:#858c98;
+  --line:#262a33; --accent:#8fa6ff; --accent-soft:#1b2235; --accent-text:#b3c2ff;
+  --chip:#1c2028; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* nav */
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.brand{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:19px;color:var(--text);letter-spacing:-.01em}
+.brand:hover{text-decoration:none}
+.links{display:flex;align-items:center;gap:22px;font-size:14.5px}
+.links a{color:var(--text-2);font-weight:500}
+.links a:hover,.links a.active{color:var(--accent);text-decoration:none}
+.toggle{background:none;border:1px solid var(--line);border-radius:8px;width:34px;height:34px;display:grid;place-items:center;color:var(--text-2);cursor:pointer}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.toggle svg{width:16px;height:16px}
+.menu-btn{display:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:56px;padding:64px 0 40px;align-items:start}
+h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:44px;line-height:1.1;letter-spacing:-.02em;margin:0 0 8px}
+.role{color:var(--text-2);font-size:16px;margin:0 0 28px}
+.role a{color:var(--text-2)}
+.bio p{margin:0 0 16px;color:var(--text);font-size:16.5px}
+.seeking{display:flex;gap:12px;align-items:flex-start;margin-top:24px;padding:14px 18px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-soft);border-radius:12px;color:var(--accent-text);font-size:15px;line-height:1.55}
+.seeking .dot{flex:none;width:8px;height:8px;margin-top:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.seeking b{font-weight:600}
+.side{display:flex;flex-direction:column;align-items:center;gap:18px}
+.photo{width:230px;height:270px;border-radius:16px;object-fit:cover;background:var(--bg-soft);border:1px solid var(--line);box-shadow:var(--shadow)}
+.photo-fallback{width:230px;height:270px;border-radius:16px;background:var(--bg-soft);border:1px solid var(--line);display:none;place-items:center;font-family:"Source Serif 4",serif;font-size:56px;color:var(--text-3)}
+.social{display:flex;gap:10px}
+.social a{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;color:var(--text-2);transition:.15s}
+.social a:hover{color:var(--accent);border-color:var(--accent);text-decoration:none;transform:translateY(-1px)}
+.social svg{width:18px;height:18px}
+.cv-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:9px 18px;border-radius:10px;background:var(--accent);color:#fff}
+:root[data-theme="dark"] .cv-btn{color:#0f1115}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cv-btn{color:#0f1115}}
+.cv-btn:hover{text-decoration:none;opacity:.92}
+.cv-btn svg{width:16px;height:16px}
+
+/* sections */
+section{padding:40px 0;border-top:1px solid var(--line)}
+h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:0 0 24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13.5px;font-weight:500;padding:5px 12px;border-radius:8px;background:var(--chip);border:1px solid var(--line);color:var(--text-2);line-height:1.5}
+.chip.accent{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent);color:var(--accent-text);font-size:14.5px;padding:7px 14px}
+.entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;margin-bottom:28px}
+.entry:last-child{margin-bottom:0}
+.entry h3{margin:0;font-size:17px;font-weight:600;line-height:1.45}
+.entry .when{color:var(--text-3);font-size:14px;white-space:nowrap;text-align:right}
+.entry .sub{grid-column:1/-1;color:var(--text-2);font-size:15px}
+.entry .sub i{font-style:normal;color:var(--text-3)}
+.entry ul{grid-column:1/-1;margin:6px 0 0;padding-left:20px;color:var(--text-2);font-size:15.5px}
+.entry ul li{margin-bottom:4px}
+.entry .desc{grid-column:1/-1;color:var(--text-2);font-size:15.5px;margin-top:2px}
+.gpa{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:var(--bg);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));transform:translateY(-2px)}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card h3{margin:0;font-size:16.5px;font-weight:600;line-height:1.4}
+.card .when{color:var(--text-3);font-size:13px;white-space:nowrap}
+.card ul{margin:0;padding-left:18px;color:var(--text-2);font-size:14.8px;line-height:1.6;flex:1}
+.card ul li{margin-bottom:4px}
+.card .chips{gap:6px}
+.card .chip{font-size:12.5px;padding:2px 9px}
+.live{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--accent-text);background:var(--accent-soft);padding:1px 8px;border-radius:6px;margin-left:6px;vertical-align:2px}
+
+/* teaching */
+.ta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.ta:first-of-type{padding-top:0}
+.ta:last-child{border-bottom:none;padding-bottom:0}
+.badge{font-size:12px;font-weight:600;padding:2px 10px;border-radius:6px;background:var(--chip);border:1px solid var(--line);color:var(--text-2);align-self:start;margin-top:3px;text-align:center;min-width:72px}
+.badge.head{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent);color:var(--accent-text)}
+.ta h3{margin:0;font-size:16px;font-weight:600}
+.ta h3 span{font-weight:400;color:var(--text-2)}
+.ta .when{color:var(--text-3);font-size:14px;white-space:nowrap}
+.ta p{grid-column:2/-1;margin:2px 0 0;color:var(--text-2);font-size:15px}
+.org{color:var(--text-3);font-size:15px;margin:-12px 0 20px}
+
+/* skills */
+.skills{display:grid;gap:22px}
+.skills h3{margin:0 0 10px;font-size:14px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
+
+/* languages */
+.langs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.lang{border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.lang h3{margin:0 0 4px;font-size:16px;font-weight:600}
+.lang p{margin:0;color:var(--text-2);font-size:15px}
+
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--text-3);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .links{display:none;position:absolute;top:60px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:0;padding:8px 16px 14px}
+  .links.open{display:flex}
+  .links a{padding:8px 0;width:100%}
+  .menu-btn{display:grid}
+  .hero{grid-template-columns:1fr;gap:28px;padding:36px 0 32px}
+  .side{order:-1}
+  .photo,.photo-fallback{width:170px;height:200px}
+  h1{font-size:34px;text-align:center}
+  .role{text-align:center}
+  .grid,.langs{grid-template-columns:1fr}
+  .entry{grid-template-columns:1fr}
+  .entry .when{text-align:left;grid-row:2}
+  .ta{grid-template-columns:auto minmax(0,1fr)}
+  .ta .when{grid-column:2;grid-row:2}
+  .ta p{grid-column:1/-1}
+  h2{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">Rozhan Vassef</a>
+    <div style="display:flex;align-items:center;gap:14px">
+      <nav class="links" id="links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#skills">Skills</a>
+        <!-- CV-START (delete this whole line to show the CV link in the menu)
+        <a href="files/Rozhan_Vassef_CV.pdf" target="_blank" rel="noopener">CV</a>
+        CV-END (delete this whole line too) -->
+      </nav>
+      <button class="toggle" id="theme" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+      <button class="toggle menu-btn" id="menu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- ========== ABOUT ========== -->
+  <div class="hero" id="about">
+    <div>
+      <h1>Rozhan Vassef</h1>
+      <p class="role">Computer Science · <a href="https://aut.ac.ir/en" target="_blank" rel="noopener">Amirkabir University of Technology</a></p>
+      <div class="bio">
+        <p>I am a final-semester Computer Science student at Amirkabir University of Technology with a strong foundation in mathematics and a passion for research in deep learning. My main interests are 3D computer vision and generative models, along with optimization and reinforcement learning.</p>
+        <p>Beyond my core research, I am passionate about applied mathematics and data science, from linear algebra and numerical methods to integer programming and data-driven modeling with end-to-end machine learning pipelines.</p>
+        <p>I am a lifelong learner, always eager to explore new fields and to keep deepening my expertise in the areas I care about most.</p>
+      </div>
+      <div class="seeking">
+        <span class="dot" aria-hidden="true"></span>
+        <span><b>Actively seeking</b> Master's and direct-PhD positions in computer vision and deep learning.</span>
+      </div>
+    </div>
+
+    <aside class="side">
+      <img class="photo" src="images/profile.jpg" alt="Photo of Rozhan Vassef"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+      <div class="photo-fallback" aria-hidden="true">RV</div>
+      <div class="social">
+        <a id="mail" href="#" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a href="https://github.com/rozhanvassef" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/rozhan-vassef" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        </a>
+      </div>
+      <!-- CV-START (delete this whole line to show the Download CV button)
+      <a class="cv-btn" href="files/Rozhan_Vassef_CV.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>
+        Download CV
+      </a>
+      CV-END (delete this whole line too) -->
+    </aside>
+  </div>
+
+  <!-- ========== RESEARCH INTERESTS ========== -->
+  <section id="interests">
+    <h2>Research Interests</h2>
+    <div class="chips">
+      <span class="chip accent">Deep Learning</span>
+      <span class="chip accent">3D Computer Vision</span>
+      <span class="chip accent">Generative Models</span>
+      <span class="chip accent">Optimization &amp; Reinforcement Learning</span>
+    </div>
+  </section>
+
+  <!-- ========== EDUCATION ========== -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="entry">
+      <h3>Amirkabir University of Technology</h3>
+      <div class="when">Sep 2022 – Expected Jan 2027</div>
+      <div class="sub">B.Sc. in Computer Science · Tehran, Iran</div>
+      <div class="gpa">
+        <span class="chip">GPA of last four semesters: 18.78/20</span>
+        <span class="chip">Cumulative GPA: 17.99/20</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESEARCH EXPERIENCE ========== -->
+  <section id="research">
+    <h2>Research Experience</h2>
+    <div class="entry">
+      <h3>Research Assistant</h3>
+      <div class="when">Jun 2025 – Present</div>
+      <div class="sub">Autonomous Intelligent Systems Lab (AISL), Amirkabir University of Technology · Tehran, Iran</div>
+      <div class="sub"><i>In collaboration with Tsukada Laboratory, The University of Tokyo (Remote) · Supervisor: Dr. Mahdi Javanmardi</i></div>
+      <ul>
+        <li>Conducting research on 3D reconstruction and novel view synthesis, developing methods that enhance rendering quality and multi-view consistency by combining optimization-based reconstruction with diffusion-based generative approaches.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section id="projects">
+    <h2>Selected Projects</h2>
+    <div class="grid">
+
+      <article class="card">
+        <div class="top"><h3>Robust Quadruped Locomotion via Reinforcement Learning<span class="live">Ongoing</span></h3></div>
+        <div class="when">Fall 2026 – Present</div>
+        <ul>
+          <li>Training quadruped locomotion policies with PPO in GPU-accelerated MuJoCo simulation.</li>
+          <li>Evaluating how domain randomization affects robustness to unseen friction, mass, and terrain conditions.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">JAX</span><span class="chip">MuJoCo</span></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><h3>Domain Adaptation of Vision-Language Models for Medical VQA<span class="live">Ongoing</span></h3></div>
+        <div class="when">Summer 2026 – Present</div>
+        <ul>
+          <li>Fine-tuning Qwen2.5-VL with LoRA on medical VQA, using module-wise ablations to locate where domain learning happens.</li>
+          <li>Built an evaluation harness that separates genuine accuracy gains from answer-format effects.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">LoRA</span></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><h3>Retrieval-Augmented QA over Foundational LLM Papers<span class="live">Ongoing</span></h3></div>
+        <div class="when">Summer 2026 – Present</div>
+        <ul>
+          <li>Building a cited QA system over foundational LLM papers, comparing sparse, dense, and hybrid retrieval.</li>
+          <li>Evaluating retrieval quality and answer faithfulness on a hand-written test set, with abstention.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Hugging Face</span><span class="chip">FAISS</span></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><h3>Integer Programming for Stable College Admissions</h3></div>
+        <div class="when">Spring 2026</div>
+        <ul>
+          <li>Implemented 14 integer programming models from Ágoston et al. (EJOR 2022) for stable matching with ties and common quotas.</li>
+          <li>Extended them with a two-phase waitlist mechanism, tested on a hospitals/residents benchmark.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Pyomo</span><span class="chip">GLPK</span></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><h3>NeRF vs. 3D Gaussian Splatting: A Controlled Comparison</h3></div>
+        <div class="when">Summer 2025</div>
+        <ul>
+          <li>Implemented NeRF from scratch and compared it with 3DGS under identical train/test splits.</li>
+          <li>Benchmarked quality, speed, and memory, and ablated input-view count to study sparse-view failures.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">CUDA</span></div>
+      </article>
+
+      <article class="card">
+        <div class="top"><h3>Training-Free Style Transfer with Guided Diffusion</h3></div>
+        <div class="when">Summer 2025</div>
+        <ul>
+          <li>Adapted Training-Free Guidance (TFG) to style transfer by initializing diffusion from the content image.</li>
+          <li>Guided a pretrained diffusion model with a Gram-matrix style loss, without any fine-tuning.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ========== TEACHING ========== -->
+  <section id="teaching">
+    <h2>Teaching Experience</h2>
+    <p class="org">Amirkabir University of Technology</p>
+
+    <div class="ta">
+      <span class="badge">TA</span>
+      <h3>Deep Learning <span>– Dr. Fatemeh Shakeri</span></h3>
+      <span class="when">Fall 2026</span>
+      <p>Designing course projects on RNNs and Transformers, plus a paper-review project on diffusion models.</p>
+    </div>
+    <div class="ta">
+      <span class="badge">TA</span>
+      <h3>Numerical Linear Algebra <span>– Dr. Mehdi Dehghan</span></h3>
+      <span class="when">Spring &amp; Fall 2026</span>
+      <p>Held Jupyter notebook workshops on real-world applications of solvers, matrix factorizations, and eigenvalue methods.</p>
+    </div>
+    <div class="ta">
+      <span class="badge head">Head TA</span>
+      <h3>Computer Graphics <span>– Dr. Mostafa Shamsi</span></h3>
+      <span class="when">Spring 2026</span>
+      <p>Led the TA team and designed projects on transformations, geometric modeling, image filtering, and morphological operations.</p>
+    </div>
+    <div class="ta">
+      <span class="badge">TA</span>
+      <h3>Data Mining <span>– Dr. Fatemeh Shakeri</span></h3>
+      <span class="when">Spring 2026</span>
+      <p>Designed a full-pipeline ML project for loan status prediction and prepared lecture slides on Locality-Sensitive Hashing.</p>
+    </div>
+    <div class="ta">
+      <span class="badge">TA</span>
+      <h3>Artificial Intelligence and Workshop <span>– Prof. Mehdi Ghatee</span></h3>
+      <span class="when">Fall 2024 &amp; Spring 2025</span>
+      <p>Designed a full-pipeline house price prediction project covering feature engineering, model selection, and evaluation.</p>
+    </div>
+    <div class="ta">
+      <span class="badge head">Head TA</span>
+      <h3>Foundations of Numerical Analysis <span>– Dr. Mostafa Shamsi</span></h3>
+      <span class="when">Fall 2024 &amp; Spring 2025</span>
+      <p>Led the TA team and designed problems on root-finding, interpolation, and numerical integration.</p>
+    </div>
+  </section>
+
+  <!-- ========== PROFESSIONAL DEVELOPMENT ========== -->
+  <section id="development">
+    <h2>Professional Development</h2>
+    <div class="entry">
+      <h3>Oxford Machine Learning School – MLx Representation Learning &amp; Gen AI</h3>
+      <div class="when">2026 · Oxford, UK</div>
+      <div class="desc">Selective program led by academic and industry researchers, covering Multimodal AI, Open-Endedness, World Models, and Causal Discovery.</div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div>
+        <h3>Programming Languages</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">C</span><span class="chip">C++</span><span class="chip">MATLAB</span><span class="chip">LaTeX</span></div>
+      </div>
+      <div>
+        <h3>Machine Learning &amp; Deep Learning</h3>
+        <div class="chips"><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">scikit-learn</span><span class="chip">Hugging Face</span><span class="chip">Weights &amp; Biases</span><span class="chip">NumPy</span><span class="chip">Pandas</span><span class="chip">Matplotlib</span></div>
+      </div>
+      <div>
+        <h3>Computer Vision</h3>
+        <div class="chips"><span class="chip">OpenCV</span><span class="chip">Open3D</span><span class="chip">COLMAP</span><span class="chip">Kornia</span><span class="chip">Diffusers</span><span class="chip">CLIP</span><span class="chip">Pillow</span><span class="chip">Albumentations</span></div>
+      </div>
+      <div>
+        <h3>Tools &amp; Technologies</h3>
+        <div class="chips"><span class="chip">Git</span><span class="chip">Linux</span><span class="chip">Jupyter</span><span class="chip">CUDA</span><span class="chip">Pyomo</span><span class="chip">GLPK</span><span class="chip">Mathematica</span><span class="chip">Maple</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LANGUAGES ========== -->
+  <section id="languages">
+    <h2>Languages &amp; Test Scores</h2>
+    <div class="langs">
+      <div class="lang">
+        <h3>English</h3>
+        <p>Professional working proficiency<br>TOEFL iBT 5.5/6 (≈110/120) · Speaking 6, Writing 5.5</p>
+      </div>
+      <div class="lang">
+        <h3>Persian</h3>
+        <p>Native</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Rozhan Vassef</span>
+    <span>Last updated: October 2026</span>
+  </div>
+</footer>
+
+<script>
+  // Email is assembled here so spam bots can't read it from the page
+  (function(){
+    var u = "rozhanvassef82", d = "gmail.com";
+    var m = document.getElementById("mail");
+    m.href = "mailto:" + u + "@" + d;
+    m.title = u + "@" + d;
+  })();
+
+  // Dark / light mode toggle (remembers the visitor's choice)
+  (function(){
+    var root = document.documentElement, key = "theme";
+    try { var saved = localStorage.getItem(key); if (saved) root.setAttribute("data-theme", saved); } catch(e){}
+    document.getElementById("theme").addEventListener("click", function(){
+      var cur = root.getAttribute("data-theme") ||
+        (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var next = cur === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(key, next); } catch(e){}
+    });
+  })();
+
+  // Mobile menu
+  (function(){
+    var links = document.getElementById("links");
+    document.getElementById("menu").addEventListener("click", function(){ links.classList.toggle("open"); });
+    links.addEventListener("click", function(e){ if (e.target.tagName === "A") links.classList.remove("open"); });
+  })();
+
+  // Highlight the current section in the menu
+  (function(){
+    var navLinks = document.querySelectorAll('.links a[href^="#"]');
+    var ids = Array.prototype.map.call(navLinks, function(a){ return a.getAttribute("href").slice(1); });
+    window.addEventListener("scroll", function(){
+      var current = ids[0];
+      ids.forEach(function(id){
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < 120) current = id;
+      });
+      navLinks.forEach(function(a){ a.classList.toggle("active", a.getAttribute("href") === "#" + current); });
+    }, { passive: true });
+  })();
+</script>
+</body>
+</html>
